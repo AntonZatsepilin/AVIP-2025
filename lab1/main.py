@@ -88,9 +88,9 @@ if __name__ == '__main__':
         
         if selected_operation == 'rgb':
             r, g, b = split_rgb_components(img)
-            Image.fromarray(r, 'L').save(path.join(output_dir, 'R.png'))
-            Image.fromarray(g, 'L').save(path.join(output_dir, 'G.png'))
-            Image.fromarray(b, 'L').save(path.join(output_dir, 'B.png'))
+            Image.fromarray(r, 'RGB').save(path.join(output_dir, 'R.png'))
+            Image.fromarray(g, 'RGB').save(path.join(output_dir, 'G.png'))
+            Image.fromarray(b, 'RGB').save(path.join(output_dir, 'B.png'))
             print("Компоненты сохранены как R.png, G.png, B.png")
         
         elif selected_operation == 'hsi':

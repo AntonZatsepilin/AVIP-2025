@@ -3,9 +3,13 @@ import numpy as np
 from os import path
 
 def split_rgb_components(img_array):
-    r = img_array[:, :, 0]
-    g = img_array[:, :, 1]
-    b = img_array[:, :, 2]
+    r = np.zeros_like(img_array)
+    r[:, :, 0] = img_array[:, :, 0] 
+    g = np.zeros_like(img_array)
+    g[:, :, 1] = img_array[:, :, 1]  
+    b = np.zeros_like(img_array)
+    b[:, :, 2] = img_array[:, :, 2]  
+    
     return r, g, b
 
 def rgb_to_hsi(img_array):
@@ -15,18 +19,15 @@ def rgb_to_hsi(img_array):
     for i in range(img_normalized.shape[0]):
         for j in range(img_normalized.shape[1]):
             r, g, b = img_normalized[i, j]
-            
-            # Intensity
+        
             i_val = (r + g + b) / 3.0
             
-            # Saturation
             min_val = min(r, g, b)
             if (r + g + b) == 0:
                 s_val = 0.0
             else:
                 s_val = 1.0 - (3 * min_val) / (r + g + b)
             
-            # Hue
             numerator = 0.5 * ((r - g) + (r - b))
             denominator = np.sqrt((r - g)**2 + (r - b)*(g - b)) + 1e-6
             theta = np.arccos(numerator / denominator)
