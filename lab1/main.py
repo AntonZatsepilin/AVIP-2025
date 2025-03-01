@@ -51,7 +51,7 @@ def execute(img, f1, f2, number_type=int):
 
 if __name__ == '__main__':
     images = {
-        'Cat': 'cat.png'
+        'Pokemon': 'pokemon.png'
     }
     
     operation_categories = {
