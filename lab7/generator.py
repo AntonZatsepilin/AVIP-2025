@@ -1,11 +1,11 @@
 from PIL import Image, ImageDraw, ImageFont
 import os
 
-output_folder = os.path.join(os.path.dirname(__file__), "images")
+output_folder = "images"
 if not os.path.exists(output_folder):
     os.makedirs(output_folder)
 
-letters = "אבגדהוזחטיכךלמםנןסעפףצץקרשת" # hebrew alphabet
+letters = "גדהוזחטיכךלמםנןסעפףצץקרשתﭏ" # hebrew alphabet
 
 font = ImageFont.truetype("Times New Roman.ttf", 52)
 
@@ -20,3 +20,4 @@ for letter in letters:
     draw.text(position, letter, fill=0, font=font)
 
     img.save(f"{output_folder}/{letter}.png")
+

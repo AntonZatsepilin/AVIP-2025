@@ -4,20 +4,12 @@ import numpy as np
 from PIL import Image
 import os
 import matplotlib.pyplot as plt
-from pathlib import Path
 
-base_dir = Path(__file__).parent
-inverse_path = base_dir / "inverse"
-profiles_path = base_dir / "profiles"
-output_csv_path = base_dir / "features.csv"
+inverse_path = 'inverse'
+profiles_path = 'profiles'
+output_csv_path = 'features.csv'
 
-os.makedirs(inverse_path, exist_ok=True)
-os.makedirs(profiles_path, exist_ok=True)
-
-FEATURES_CSV = 'features.csv'
-FEATURES_CSV = os.path.join(base_dir, 'features.csv')
-
-with open(os.path.join(base_dir, 'alphabet.txt'), encoding='utf-8') as f:
+with open('alphabet.txt') as f:
     alfabet = f.readline()
 
 os.makedirs(profiles_path, exist_ok=True)
@@ -165,7 +157,7 @@ print(f"Обработка завершена. Данные сохранены �
 
 FEATURES_CSV = 'features.csv'
 TEST_IMAGE_DIR = 'test'
-GROUND_TRUTH = 'אמת'  # Пример строки, которую нужно распознать
+GROUND_TRUTH = 'חיי'  # Пример строки, которую нужно распознать
 
 # Какие признаки используем (можно расширить)
 USED_FEATURES = [

@@ -1,12 +1,13 @@
 import os
 import numpy as np
+from pathlib import Path
 from PIL import Image, ImageDraw
 
-base_dir = os.path.dirname(__file__)
-SRC_PATH = os.path.join(base_dir, "mphrase.bmp")
-DST_DIR = os.path.join(base_dir, "alphabet")
 
-alphabet = 'אבגדהוזחטיכךלמםנןסעפףצץקרשת'
+SRC_PATH = "alphabet_phrase.png"
+DST_DIR   = "alphabet"
+
+alphabet = 'גדהוזחטיכךלמםנןסעפףצץקרשתﭏ'
 
 os.makedirs(DST_DIR, exist_ok=True)
 
@@ -82,12 +83,21 @@ def split_wide_boxes(boxes: list[tuple], bin_img: np.ndarray, factor: float = 1.
 
 
 def save_letter_profiles(bin_img: np.ndarray, boxes: list[tuple]):
-    # Исправленный порядок символов
+    counter = 25
     for idx, (x0,y0,x1,y1) in enumerate(boxes):
+
         patch = bin_img[y0:y1+1, x0:x1+1]
+
         char_img = Image.fromarray((1 - patch) * 255)
-        bmp_name = f"{alphabet[idx]}.bmp"  # Прямой порядок
+        bmp_name = f"{alphabet[counter]}.bmp"
+        counter -= 1
         char_img.save(os.path.join(DST_DIR, bmp_name))
+
+        # h_prof, v_prof = profiles(patch)
+        # txt_name = f"{idx:02d}.txt"
+        # with open(os.path.join(DST_DIR, txt_name), "w", encoding="utf-8") as f:
+        #     f.write("horizontal:\n" + " ".join(map(str, h_prof.tolist())) + "\n")
+        #     f.write("vertical:\n"   + " ".join(map(str, v_prof.tolist())))
 
 def draw_boxes(path: str, boxes: list[tuple]):
     img = Image.open(path).convert("RGB")
@@ -101,7 +111,6 @@ bin_img = to_binary(SRC_PATH)
 
 boxes = segment_by_profiles(bin_img, empty_thresh=2)
 boxes = split_wide_boxes(boxes, bin_img, factor=2)
-boxes.reverse()
 
 draw_boxes(SRC_PATH, boxes)
 save_letter_profiles(bin_img, boxes)

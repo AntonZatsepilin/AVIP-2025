@@ -3,7 +3,6 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw
 import json
-from recognition import USED_FEATURES, calculate_features
 
 def tupling(alph, arr):
     if len(arr) != len(alph):
@@ -15,10 +14,9 @@ def tupling(alph, arr):
 
 etalonses = ['חיי', 'את', 'שמאיר', 'האור', 'אתה']
 
-base_dir = Path(__file__).parent
-ALPHABET_DIR = base_dir / "alphabet"
-DST_DIR = base_dir / "pictures_results"
-SRC_PATH = base_dir / "phrase3.png"
+SRC_PATH     = Path("phrase3.png")
+ALPHABET_DIR = Path("alphabet")
+DST_DIR      = Path("pictures_results")
 PHRASE_GT    = etalonses[3]
 SIZE         = (64, 64)
 PHRASE_GT = PHRASE_GT[::-1]
@@ -116,8 +114,6 @@ def load_templates():
     tpls = []
     for ch in ALPHABET:
         path = ALPHABET_DIR / f"{ch}.bmp"
-        if not path.exists():
-            raise FileNotFoundError(f"Template {path} not found. Run alphabeter.py first!")
         bin_img = to_binary(path)
         tpl = normalize_bin(bin_img).astype(bool)
         tpls.append(tpl)
@@ -143,10 +139,7 @@ def recognise_image(path: Path, tpl_stack: np.ndarray, keys: list[str]):
 
     for x0, y0, x1, y1 in boxes:
         sub = bin_img[y0:y1 + 1, x0:x1 + 1]
-        sub = normalize_bin(sub)
-        sub_features = calculate_features(sub.astype(np.uint8))
-        test_vector = np.array([sub_features[k] for k in USED_FEATURES])
-        similarities = [1/(1 + np.linalg.norm(test_vector - tpl)) for tpl in tpl_stack]
+        sub = normalize_bin(sub).astype(bool)
 
         ious = compute_iou_batch(tpl_stack, sub)
         chances = tupling(ALPHABET, ious)
@@ -189,12 +182,12 @@ def main():
     img.save(DST_DIR / "phrase_boxes_fixed.bmp")
     hyp_path = DST_DIR / "best_hypotheses.txt"
     with hyp_path.open("w", encoding="utf-8") as f:
-        for i, chance in enumerate(chances):
-            line = f"{i+1}: ["
+        f.write("Выводится массив гипотез по возрастанию\n\n")
+        for chance in chances:
+            f.write("[")
             for char, score in chance:
-                line += f"('{char}', {score:.2f}), "
-            line = line.rstrip(", ") + "]\n"
-            f.write(line)
+                f.write(f"({score:.16f}, {char}), ")
+            f.write("]\n")
 
 
 if __name__ == "__main__":
