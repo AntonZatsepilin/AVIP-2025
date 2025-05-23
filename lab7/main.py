@@ -12,12 +12,11 @@ def tupling(alph, arr):
     return sorted(res, key = lambda x : -x[1])
 
 
-etalonses = ['חיי', 'את', 'שמאיר', 'האור', 'אתה']
 
-SRC_PATH     = Path("phrase3.png")
+SRC_PATH     = Path("parse.png")
 ALPHABET_DIR = Path("alphabet")
 DST_DIR      = Path("pictures_results")
-PHRASE_GT    = etalonses[3]
+PHRASE_GT    = "אַתְּ אֵשׁ בְּתוֹךְ עַצְמִי".replace(" ", "") 
 SIZE         = (64, 64)
 PHRASE_GT = PHRASE_GT[::-1]
 ALPHABET = list("גדהוזחטיכךלמםנןסעפףצץקרשתﭏ")

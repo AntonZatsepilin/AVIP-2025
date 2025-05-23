@@ -3,13 +3,14 @@ import csv
 import numpy as np
 from PIL import Image
 import os
+from main import calculate_features
 import matplotlib.pyplot as plt
 
 inverse_path = 'inverse'
 profiles_path = 'profiles'
 output_csv_path = 'features.csv'
 
-with open('alphabet.txt') as f:
+with open('../alphabet.txt') as f:
     alfabet = f.readline()
 
 os.makedirs(profiles_path, exist_ok=True)
@@ -157,7 +158,7 @@ print(f"Обработка завершена. Данные сохранены �
 
 FEATURES_CSV = 'features.csv'
 TEST_IMAGE_DIR = 'test'
-GROUND_TRUTH = 'חיי'  # Пример строки, которую нужно распознать
+GROUND_TRUTH = 'אמת'  # Пример строки, которую нужно распознать
 
 # Какие признаки используем (можно расширить)
 USED_FEATURES = [
