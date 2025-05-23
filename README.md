@@ -114,3 +114,43 @@
 Порог бинаризации: 70
 
 ![](./lab4/out/G_binary.png)
+
+# Лабораторная работа №5
+## Выделение признаков символов
+
+#### Алфавит (иврит):
+#### ג ד ה ו ז ח ט י כ ך ל מ ם נ ן ס ע פ ף צ ץ ק ר ש ת ﭏ
+
+### 5.1. Эталонные изображения сгенерированы в директории [`lab5/images`](lab5/images) (шрифт Times New Roman, кегль 52)
+
+### 5.2. Признаки по каждой букве:
+[features.csv](lab5/features.csv)
+
+### 5.3. Профили:
+
+#### 1
+![Буква](lab5/images/ג.png)
+
+Профиль по X:  
+![Профиль X](lab5/profiles/ג_profile_x.png)
+
+Профиль по Y:  
+![Профиль Y](lab5/profiles/ג_profile_y.png)
+
+#### 2
+![Буква](lab5/images/ה.png)
+
+Профиль по X:  
+![Профиль X](lab5/profiles/ה_profile_x.png)
+
+Профиль по Y:  
+![Профиль Y](lab5/profiles/ה_profile_y.png)
+
+#### 3
+![Буква](lab5/images/ו.png)
+
+Профиль по X:  
+![Профиль X](lab5/profiles/ו_profile_x.png)
+
+Профиль по Y:  
+![Профиль Y](lab5/profiles/ו_profile_y.png)
