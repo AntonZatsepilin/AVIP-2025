@@ -113,15 +113,15 @@ def gap_is_space(prev_box, curr_box, ratio=0.5):
 
 
 def load_templates():
-    features_list = []
+    tpls = []
     for ch in ALPHABET:
         path = ALPHABET_DIR / f"{ch}.bmp"
+        if not path.exists():
+            raise FileNotFoundError(f"Template {path} not found. Run alphabeter.py first!")
         bin_img = to_binary(path)
-        tpl = normalize_bin(bin_img)
-        features = calculate_features(tpl.astype(np.uint8))
-        feature_vector = np.array([features[k] for k in USED_FEATURES])
-        features_list.append(feature_vector)
-    return np.stack(features_list, axis=0), ALPHABET
+        tpl = normalize_bin(bin_img).astype(bool)
+        tpls.append(tpl)
+    return np.stack(tpls, axis=0), ALPHABET
 
 
 def compute_iou_batch(tpl_stack: np.ndarray, sub: np.ndarray) -> np.ndarray:

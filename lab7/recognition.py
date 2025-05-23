@@ -4,13 +4,15 @@ import numpy as np
 from PIL import Image
 import os
 import matplotlib.pyplot as plt
+from pathlib import Path
 
-base_dir = os.path.dirname(__file__)
-inverse_path = os.path.join(base_dir, 'inverse')
-profiles_path = os.path.join(base_dir, 'profiles')
-output_csv_path = os.path.join(base_dir, 'features.csv')
-test_image_dir = os.path.join(base_dir, 'test')
-hypotheses_path = os.path.join(base_dir, 'hypotheses.txt')
+base_dir = Path(__file__).parent
+inverse_path = base_dir / "inverse"
+profiles_path = base_dir / "profiles"
+output_csv_path = base_dir / "features.csv"
+
+os.makedirs(inverse_path, exist_ok=True)
+os.makedirs(profiles_path, exist_ok=True)
 
 FEATURES_CSV = 'features.csv'
 FEATURES_CSV = os.path.join(base_dir, 'features.csv')
