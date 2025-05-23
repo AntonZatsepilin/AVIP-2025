@@ -6,7 +6,7 @@ base_dir = os.path.dirname(__file__)
 SRC_PATH = os.path.join(base_dir, "mphrase.bmp")
 DST_DIR = os.path.join(base_dir, "alphabet")
 
-alphabet = 'גדהוזחטיכךלמםנןסעפףצץקרשתﭏ'
+alphabet = 'אבגדהוזחטיכךלמםנןסעפףצץקרשת'
 
 os.makedirs(DST_DIR, exist_ok=True)
 
@@ -82,14 +82,10 @@ def split_wide_boxes(boxes: list[tuple], bin_img: np.ndarray, factor: float = 1.
 
 
 def save_letter_profiles(bin_img: np.ndarray, boxes: list[tuple]):
-    counter = 25
     for idx, (x0,y0,x1,y1) in enumerate(boxes):
-
         patch = bin_img[y0:y1+1, x0:x1+1]
-
         char_img = Image.fromarray((1 - patch) * 255)
-        bmp_name = f"{alphabet[counter]}.bmp"
-        counter -= 1
+        bmp_name = f"{alphabet[idx]}.bmp" 
         char_img.save(os.path.join(DST_DIR, bmp_name))
 
 def draw_boxes(path: str, boxes: list[tuple]):
@@ -104,6 +100,7 @@ bin_img = to_binary(SRC_PATH)
 
 boxes = segment_by_profiles(bin_img, empty_thresh=2)
 boxes = split_wide_boxes(boxes, bin_img, factor=2)
+boxes.reverse()  
 
 draw_boxes(SRC_PATH, boxes)
 save_letter_profiles(bin_img, boxes)

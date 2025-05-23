@@ -3,6 +3,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw
 import json
+from recognition import USED_FEATURES, calculate_features
 
 def tupling(alph, arr):
     if len(arr) != len(alph):
@@ -112,13 +113,15 @@ def gap_is_space(prev_box, curr_box, ratio=0.5):
 
 
 def load_templates():
-    tpls = []
+    features_list = []
     for ch in ALPHABET:
         path = ALPHABET_DIR / f"{ch}.bmp"
         bin_img = to_binary(path)
-        tpl = normalize_bin(bin_img).astype(bool)
-        tpls.append(tpl)
-    return np.stack(tpls, axis=0), ALPHABET
+        tpl = normalize_bin(bin_img)
+        features = calculate_features(tpl.astype(np.uint8))
+        feature_vector = np.array([features[k] for k in USED_FEATURES])
+        features_list.append(feature_vector)
+    return np.stack(features_list, axis=0), ALPHABET
 
 
 def compute_iou_batch(tpl_stack: np.ndarray, sub: np.ndarray) -> np.ndarray:
@@ -140,7 +143,10 @@ def recognise_image(path: Path, tpl_stack: np.ndarray, keys: list[str]):
 
     for x0, y0, x1, y1 in boxes:
         sub = bin_img[y0:y1 + 1, x0:x1 + 1]
-        sub = normalize_bin(sub).astype(bool)
+        sub = normalize_bin(sub)
+        sub_features = calculate_features(sub.astype(np.uint8))
+        test_vector = np.array([sub_features[k] for k in USED_FEATURES])
+        similarities = [1/(1 + np.linalg.norm(test_vector - tpl)) for tpl in tpl_stack]
 
         ious = compute_iou_batch(tpl_stack, sub)
         chances = tupling(ALPHABET, ious)
@@ -183,12 +189,12 @@ def main():
     img.save(DST_DIR / "phrase_boxes_fixed.bmp")
     hyp_path = DST_DIR / "best_hypotheses.txt"
     with hyp_path.open("w", encoding="utf-8") as f:
-        f.write("Выводится массив гипотез по возрастанию\n\n")
-        for chance in chances:
-            f.write("[")
+        for i, chance in enumerate(chances):
+            line = f"{i+1}: ["
             for char, score in chance:
-                f.write(f"({score:.16f}, {char}), ")
-            f.write("]\n")
+                line += f"('{char}', {score:.2f}), "
+            line = line.rstrip(", ") + "]\n"
+            f.write(line)
 
 
 if __name__ == "__main__":

@@ -4,13 +4,18 @@ import numpy as np
 from PIL import Image
 import os
 import matplotlib.pyplot as plt
-from main import calculate_features
 
-inverse_path = 'inverse'
-profiles_path = 'profiles'
-output_csv_path = 'features.csv'
+base_dir = os.path.dirname(__file__)
+inverse_path = os.path.join(base_dir, 'inverse')
+profiles_path = os.path.join(base_dir, 'profiles')
+output_csv_path = os.path.join(base_dir, 'features.csv')
+test_image_dir = os.path.join(base_dir, 'test')
+hypotheses_path = os.path.join(base_dir, 'hypotheses.txt')
 
-with open('../alphabet.txt') as f:
+FEATURES_CSV = 'features.csv'
+FEATURES_CSV = os.path.join(base_dir, 'features.csv')
+
+with open(os.path.join(base_dir, 'alphabet.txt'), encoding='utf-8') as f:
     alfabet = f.readline()
 
 os.makedirs(profiles_path, exist_ok=True)

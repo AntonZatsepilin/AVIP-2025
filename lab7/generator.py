@@ -5,7 +5,7 @@ output_folder = os.path.join(os.path.dirname(__file__), "images")
 if not os.path.exists(output_folder):
     os.makedirs(output_folder)
 
-letters = "גדהוזחטיכךלמםנןסעפףצץקרשתﭏ" # hebrew alphabet
+letters = "אבגדהוזחטיכךלמםנןסעפףצץקרשת" # hebrew alphabet
 
 font = ImageFont.truetype("Times New Roman.ttf", 52)
 
