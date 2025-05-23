@@ -174,4 +174,31 @@
 
   ---
 
-  
+  # Лабораторная работа №6
+## Сегментация текста
+
+#### Выбранный алфавит: Иврит
+#### גדהוזחטיכךלמםנןסעפףצץקרשתﭏ
+
+### Скриншот:
+![Исходное изображение](lab6/mphrase.bmp)
+
+### Результат сегментации символов:
+#### Окаймляющие прямоугольники
+![Окаймляющие прямоугольники](lab6/pictures_results/phrase_boxes_fixed.bmp)
+
+#### Вырезанные символы
+<img src="lab6/pictures_results/00.bmp" alt="symbol 00" style="border: 2px solid teal;">
+<img src="lab6/pictures_results/01.bmp" alt="symbol 01" style="border: 2px solid teal;">
+<img src="lab6/pictures_results/02.bmp" alt="symbol 02" style="border: 2px solid teal;">
+<img src="lab6/pictures_results/03.bmp" alt="symbol 03" style="border: 2px solid teal;">
+<img src="lab6/pictures_results/04.bmp" alt="symbol 04" style="border: 2px solid teal;">
+<img src="lab6/pictures_results/05.bmp" alt="symbol 05" style="border: 2px solid teal;">
+<img src="lab6/pictures_results/06.bmp" alt="symbol 06" style="border: 2px solid teal;">
+<img src="lab6/pictures_results/07.bmp" alt="symbol 07" style="border: 2px solid teal;">
+<img src="lab6/pictures_results/08.bmp" alt="symbol 08" style="border: 2px solid teal;">
+<img src="lab6/pictures_results/09.bmp" alt="symbol 09" style="border: 2px solid teal;">
+
+### Профили:
+
+<h5>Сохранены в папке lab6/profiles</h5>
