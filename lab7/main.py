@@ -16,7 +16,7 @@ def tupling(alph, arr):
 SRC_PATH     = Path("parse.png")
 ALPHABET_DIR = Path("alphabet")
 DST_DIR      = Path("pictures_results")
-PHRASE_GT    = "אַתְּ אֵשׁ בְּתוֹךְ עַצְמִי".replace(" ", "") 
+PHRASE_GT    = "אני אוהב אותך".replace(" ", "") 
 SIZE         = (64, 64)
 PHRASE_GT = PHRASE_GT[::-1]
 ALPHABET = list("גדהוזחטיכךלמםנןסעפףצץקרשתﭏ")

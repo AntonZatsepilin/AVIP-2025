@@ -104,22 +104,43 @@
 ![](./lab4/src/image.png)
 
 ### Полутоновое изображение
-![](./lab4/out/grayscale.png)
+![](./lab4/report/p_grayscale.png)
 
 ### Градиентные матрицы
 #### Горизонтальный градиент (Gx)
-![](./lab4/out/Gx.png)
+![](./lab4/report/px.png)
 
 #### Вертикальный градиент (Gy)
-![](./lab4/out/Gy.png)
+![](./lab4/report/py.png)
 
 #### Результирующий градиент (G)
-![](./lab4/out/G.png)
+![](./lab4/report/p.png)
 
 ### Бинаризованный градиент
 Порог бинаризации: 70
 
-![](./lab4/out/G_binary.png)
+![](./lab4/report/p_binary.png)
+
+### Исходное изображение
+![](./lab4/src/pokemon.png)
+
+### Полутоновое изображение
+![](./lab4/report/grayscale.png)
+
+### Градиентные матрицы
+#### Горизонтальный градиент (Gx)
+![](./lab4/report/Gx.png)
+
+#### Вертикальный градиент (Gy)
+![](./lab4/report/Gy.png)
+
+#### Результирующий градиент (G)
+![](./lab4/report/G.png)
+
+### Бинаризованный градиент
+Порог бинаризации: 50
+
+![](./lab4/report/G_binary.png)
 
 ---
 
